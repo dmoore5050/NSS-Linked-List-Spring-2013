@@ -138,7 +138,7 @@ class LinkedListItemTest < Test::Unit::TestCase
   end
 
   def test_24_remove_item_from_middle_of_list
-    ll = LinkedList.new 
+    ll = LinkedList.new
     ll.add_item("foo")
     ll.add_item("bar")
     ll.add_item("grille")
@@ -157,15 +157,65 @@ class LinkedListItemTest < Test::Unit::TestCase
     ll.add_item("dog")
     ll.add_item("elephant")
     ll.remove(4)
-    
+
     assert_equal '| foo, bar, grille, dog |', ll.to_s
   end
 
-  def test_26_remove_item_that_doesnt_exist
+  def test_25b_remove_item_that_doesnt_exist
     ll = LinkedList.new
     assert_raise IndexError do
       ll.remove(0)
    end
+  end
+
+  def test_26_index_of_first_item
+    ll = LinkedList.new()
+    ll.add_item("foo")
+    ll.add_item("bar")
+    ll.add_item("good")
+    assert_equal(0, ll.indexOf("foo"))
+  end
+
+  def test_27_index_of_middle_item
+    ll = LinkedList.new()
+    ll.add_item("foo")
+    ll.add_item("bar")
+    ll.add_item("good")
+    assert_equal(1, ll.indexOf("bar"))
+  end
+
+  def test_28_index_of_last_item
+    ll = LinkedList.new()
+    ll.add_item("foo")
+    ll.add_item("bar")
+    ll.add_item("good")
+    assert_equal(2, ll.indexOf("good"))
+  end
+
+  def test_29_index_of_last_item
+    ll = LinkedList.new()
+    ll.add_item("foo")
+    ll.add_item("bar")
+    ll.add_item("good")
+    assert_equal(nil, ll.indexOf("terrible"))
+  end
+
+  def test_30_index_of_last_item
+    ll = LinkedList.new()
+    assert_equal(nil, ll.indexOf("terrible"))
+  end
+
+  def test_31_index_of_duplicate
+    ll = LinkedList.new()
+    ll.add_item("foo")
+    ll.add_item("foo")
+    ll.add_item("good")
+    assert_equal(0, ll.indexOf("foo"))
+  end
+
+  def test_32_index_of_empty_list
+    ll = LinkedList.new()
+    assert_equal(nil, ll.indexOf("foo"))
   end
 
 end

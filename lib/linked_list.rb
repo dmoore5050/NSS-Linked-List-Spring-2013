@@ -4,13 +4,11 @@ class LinkedList
   attr_reader :first_item
 
   def initialize ( *args )
-    args.each do | arg | 
-      add_item arg 
-    end  
+    args.each { | arg | add_item arg }
   end
 
   def add_item ( payload )
-    next_item = LinkedListItem.new ( payload )
+    next_item = LinkedListItem.new payload
 
     if @first_item.nil?
       @first_item = next_item
@@ -27,8 +25,8 @@ class LinkedList
     current_item = @first_item
 
     n.times do
-      raise IndexError if current_item.nil? 
-      current_item = current_item.next_list_item 
+      raise IndexError if current_item.nil?
+      current_item = current_item.next_list_item
     end
 
     current_item
@@ -45,31 +43,50 @@ class LinkedList
         final_item = final_item.next_list_item
       end
       final_item.payload
-    end  
+    end
   end
 
   def size
     list_length, current_item = 0, @first_item
 
     until current_item.nil?
-      current_item = current_item.next_list_item 
+      current_item = current_item.next_list_item
       list_length += 1
     end
 
     list_length
   end
 
-    def to_s
+  def to_s
     list_items, current_item = String.new, @first_item
 
     while current_item != nil
       list_items << " "
       list_items << current_item.payload
-      list_items << "," unless current_item.last?  
-      current_item = current_item.next_list_item 
-    end 
+      list_items << "," unless current_item.last?
+      current_item = current_item.next_list_item
+    end
 
     "|#{list_items} |"
+  end
+
+  def indexOf ( string )
+    item_index, current_item = 0, @first_item
+
+    if @first_item == nil
+      return nil
+    end
+
+    until current_item.payload == string
+      unless current_item.next_list_item == nil
+        current_item = current_item.next_list_item
+        item_index += 1
+      else
+        return nil
+      end
+    end
+
+    item_index
   end
 
   # ========= Bonus ========== #
@@ -87,13 +104,13 @@ class LinkedList
 
     ( n + 1 ).times do
       raise IndexError if next_item == nil
-      next_item = next_item.next_list_item 
+      next_item = next_item.next_list_item
     end
 
     if n > 0
       ( n - 1 ).times do
         raise IndexError if prev_item == nil
-        prev_item = prev_item.next_list_item 
+        prev_item = prev_item.next_list_item
       end
       prev_item.next_list_item = next_item
     else
