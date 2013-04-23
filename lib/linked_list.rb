@@ -73,10 +73,7 @@ class LinkedList
   def indexOf ( string )
     item_index, current_item = 0, @first_item
 
-    if @first_item == nil
-      return nil
-    end
-
+    return nil if @first_item == nil
     until current_item.payload == string
       unless current_item.next_list_item == nil
         current_item = current_item.next_list_item
