@@ -148,13 +148,19 @@ class LinkedList
     sorted_list
   end
 
-  # This is a helper I implemented
-  def swap_with_next ( position )
-    current_to_next = find_item( position ).payload
-    next_to_current = find_item( position ).next_list_item.payload
-    find_item( position ).payload = next_to_current
-    find_item( position ).next_list_item.payload = current_to_next
-    # current_to_next, next_to_current = next_to_current, current_to_next
+  def swap_with_next ( index )
+
+    initial_item = @first_item
+    next_item = @first_item
+
+    index.times do
+      initial_item = initial_item.next_list_item
+    end
+
+    current_to_next = initial_item.payload
+    next_to_current = initial_item.next_list_item.payload
+    initial_item.payload = next_to_current
+    initial_item.next_list_item.payload = current_to_next
   end
 
 

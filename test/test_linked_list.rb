@@ -234,20 +234,20 @@ class LinkedListItemTest < Test::Unit::TestCase
     assert ll.sorted?
   end
 
-  # def test_36_unsorted_list_sorted
-  #   ll = LinkedList.new("foo", "bar")
-  #   assert !ll.sorted?
-  # end
+  def test_36_unsorted_list_sorted
+    ll = LinkedList.new("foo", "bar")
+    assert !ll.sorted?
+  end
 
   def test_37_sorted_list_sorted
     ll = LinkedList.new("bar", "foo")
     assert ll.sorted?
   end
 
-  # def test_38_list_with_multiple_unsorted_types_sorted
-  #   ll = LinkedList.new(:b, "foo", 1, "bar", 2)
-  #   assert !ll.sorted?
-  # end
+  def test_38_list_with_multiple_unsorted_types_sorted
+    ll = LinkedList.new(:b, "foo", 1, "bar", 2)
+    assert !ll.sorted?
+  end
 
   def test_39_list_with_multiple_sorted_types_sorted
     ll = LinkedList.new(1, 2, "bar", "foo", :b)
