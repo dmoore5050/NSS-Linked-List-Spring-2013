@@ -136,7 +136,6 @@ class LinkedList
   end
 
   def sort
-    sorted_list = self
     current_item = @first_item
     index = 0
 
@@ -150,21 +149,21 @@ class LinkedList
       current_item = current_item.next_list_item
     end
 
-    sorted_list
+    self
   end
 
   def swap_with_next ( index )
 
-    initial_item = @first_item
+    current_item = @first_item
 
     index.times do
-      initial_item = initial_item.next_list_item
+      current_item = current_item.next_list_item
     end
 
-    current_to_next = initial_item.payload
-    next_to_current = initial_item.next_list_item.payload
-    initial_item.payload = next_to_current
-    initial_item.next_list_item.payload = current_to_next
+    current_to_next = current_item.payload
+    next_to_current = current_item.next_list_item.payload
+    current_item.payload = next_to_current
+    current_item.next_list_item.payload = current_to_next
   end
 
 end
