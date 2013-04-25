@@ -151,7 +151,6 @@ class LinkedList
   def swap_with_next ( index )
 
     initial_item = @first_item
-    next_item = @first_item
 
     index.times do
       initial_item = initial_item.next_list_item
