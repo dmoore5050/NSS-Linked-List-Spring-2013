@@ -4,7 +4,9 @@ class LinkedList
   attr_reader :first_item
 
   def initialize ( *args )
-    args.each { | arg | add_item arg }
+    args.each do | arg |
+      add_item arg
+    end
   end
 
   def add_item ( payload )
@@ -100,6 +102,7 @@ class LinkedList
   end
 
   def remove ( n )
+
     next_item = @first_item
     prev_item = @first_item
 
@@ -117,6 +120,7 @@ class LinkedList
     else
       @first_item = next_item
     end
+
   end
 
       # ========= Sorting Exercise ========== #
@@ -124,8 +128,7 @@ class LinkedList
   def sorted?
     current_item = @first_item
 
-    return true if @first_item == nil
-    until current_item.last?
+    until current_item.nil? or current_item.last?
       if current_item > current_item.next_list_item
         return false
       end
@@ -137,33 +140,25 @@ class LinkedList
 
   def sort
     current_item = @first_item
-    index = 0
 
-    return self if current_item == nil
-    until current_item.last?
+    until current_item.nil? or current_item.last?
       if current_item > current_item.next_list_item
-        swap_with_next index
+        swap_with_next current_item
         self.sort
       end
-      index += 1
       current_item = current_item.next_list_item
     end
 
     self
   end
 
-  def swap_with_next ( index )
-
-    current_item = @first_item
-
-    index.times do
-      current_item = current_item.next_list_item
-    end
+  def swap_with_next ( current_item )
 
     current_to_next = current_item.payload
     next_to_current = current_item.next_list_item.payload
     current_item.payload = next_to_current
     current_item.next_list_item.payload = current_to_next
+
   end
 
 end

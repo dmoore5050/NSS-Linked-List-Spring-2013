@@ -68,7 +68,7 @@ class LinkedListItemTest < Test::Unit::TestCase
     assert_equal '| foo, bar, grille |', ll.to_s
   end
 
-  # ========= Bonus ========== #
+ # ========= Bonus ========== #
 
   def test_16_initialize_takes_seed_argument
     ll = LinkedList.new("foo")
@@ -120,12 +120,11 @@ class LinkedListItemTest < Test::Unit::TestCase
     ll.add_item("foo")
     ll.add_item("bar")
     ll.add_item("grille")
-    # ll.remove(2)
-
-    # assert_equal '| foo, bar |', ll.to_s
     ll.remove(1)
-
     assert_equal '| foo, grille |', ll.to_s
+
+    ll.remove(1)
+    assert_equal '| foo |', ll.to_s
   end
 
   def test_23_remove_item_from_beginning_of_list
