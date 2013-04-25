@@ -126,9 +126,12 @@ class LinkedList
 
     return true if @first_item == nil
     until current_item.last?
-      current_item.payload <=> current_item.next_list_item.payload
+      if current_item > current_item.next_list_item
+        return false
+      end
       current_item = current_item.next_list_item
     end
+
     true
   end
 
@@ -136,6 +139,7 @@ class LinkedList
     sorted_list = self
     current_item = @first_item
     index = 0
+
     return self if current_item == nil
     until current_item.last?
       if current_item > current_item.next_list_item
@@ -145,6 +149,7 @@ class LinkedList
       index += 1
       current_item = current_item.next_list_item
     end
+
     sorted_list
   end
 
@@ -161,7 +166,6 @@ class LinkedList
     initial_item.payload = next_to_current
     initial_item.next_list_item.payload = current_to_next
   end
-
 
 end
 
