@@ -2,11 +2,13 @@ require 'linked_list_item'
 
 class LinkedList
   attr_reader :first_item
+  attr_reader :error_message
 
   def initialize ( *args )
     args.each do | arg |
       add_item arg
     end
+    @error_message = "The number provided does not correspond to a list item."
   end
 
   def add_item ( payload )
@@ -27,7 +29,7 @@ class LinkedList
     current_item = @first_item
 
     n.times do
-      raise IndexError if current_item.nil?
+      raise IndexError, error_message if current_item.nil?
       current_item = current_item.next_list_item
     end
 
@@ -105,15 +107,16 @@ class LinkedList
 
     next_item = @first_item
     prev_item = @first_item
+    error_message = "The number provided does not correspond to an item in the list"
 
     ( n + 1 ).times do
-      raise IndexError if next_item === nil
+      raise IndexError, error_message if next_item === nil
       next_item = next_item.next_list_item
     end
 
     if n > 0
       ( n - 1 ).times do
-        raise IndexError if prev_item === nil
+        raise IndexError, error_message if prev_item === nil
         prev_item = prev_item.next_list_item
       end
       prev_item.next_list_item = next_item
@@ -140,24 +143,43 @@ class LinkedList
 
   def sort
     current_item = @first_item
+    item_position = 0
 
     until current_item.nil? or current_item.last?
       if current_item > current_item.next_list_item
-        swap_with_next current_item
+        swap_with_next item_position
         self.sort
       end
+      item_position += 1
       current_item = current_item.next_list_item
     end
 
     self
   end
 
-  def swap_with_next ( current_item )
+  def swap_with_next ( item_position )#( current_item )
 
-    current_to_next = current_item.payload
-    next_to_current = current_item.next_list_item.payload
-    current_item.payload = next_to_current
-    current_item.next_list_item.payload = current_to_next
+    current_item = find_item( item_position )
+    next_item = find_item( item_position + 1 )
+
+    raise IndexError, "That is not a valid item" if item_position + 1 >= size
+
+    if item_position - 1 >= 0
+      previous_item = find_item( item_position - 1 )
+      previous_item.next_list_item = next_item
+    else
+      @first_item = next_item
+    end
+
+    current_item.next_list_item = next_item.next_list_item
+    next_item.next_list_item = current_item
+
+    # Previous implementation swapped payloads rather than items
+
+    # current_to_next = current_item.payload
+    # next_to_current = current_item.next_list_item.payload
+    # current_item.payload = next_to_current
+    # current_item.next_list_item.payload = current_to_next
 
   end
 

@@ -8,7 +8,7 @@ class LinkedListItem
   end
 
   def next_list_item= ( linked_list_item )
-    raise ArgumentError, "dumbass" if self === linked_list_item
+    raise ArgumentError, "Can't set next_list_item to self" if self === linked_list_item
   	@next_list_item = linked_list_item
   end
 
